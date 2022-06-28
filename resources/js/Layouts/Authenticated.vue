@@ -30,6 +30,9 @@ const showingNavigationDropdown = ref(false);
                                 <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </BreezeNavLink>
+                                <BreezeNavLink :href="route('products.index')" :active="route().current('products.index')">
+                                    Products
+                                </BreezeNavLink>
                             </div>
                         </div>
 
@@ -50,6 +53,12 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
+                                        <BreezeResponsiveNavLink :href="route('profile.user')" :active="route().current('profile.user')">
+                                            User Profile
+                                        </BreezeResponsiveNavLink>
+                                        <BreezeResponsiveNavLink :href="route('profile.password')" :active="route().current('profile.password')">
+                                            Change Password
+                                        </BreezeResponsiveNavLink>
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </BreezeDropdownLink>
@@ -86,6 +95,12 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="mt-3 space-y-1">
+                            <BreezeResponsiveNavLink :href="route('profile.user')" :active="route().current('profile.user')">
+                                User Profile
+                            </BreezeResponsiveNavLink>
+                            <BreezeResponsiveNavLink :href="route('profile.password')" :active="route().current('profile.password')">
+                                Change Password
+                            </BreezeResponsiveNavLink>
                             <BreezeResponsiveNavLink :href="route('logout')" method="post" as="button">
                                 Log Out
                             </BreezeResponsiveNavLink>
