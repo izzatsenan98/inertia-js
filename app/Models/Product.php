@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,4 +18,8 @@ class Product extends Model
     protected $fillable = [
         'name',
     ];
+
+    public static function booted(){
+        static::addGlobalScope(new UserScope());
+    }
 }

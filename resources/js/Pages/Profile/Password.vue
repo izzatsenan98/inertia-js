@@ -45,21 +45,21 @@ export default {
                         </div>
 
                         <form @submit.prevent="form.put(route('profile.password.update', form.id))">
-                            <div class="mb-2">
+                            <div class="mb-3">
                                 <BreezeLabel for="current_password" value="Current Password" />
                                 <BreezeInput id="current_password" type="password" class="mt-1 block w-full" v-model="form.current_password" required/>
                                 <div v-if="errors.current_password" class="text-red-600">
                                     {{ errors.current_password }}
                                 </div>
                             </div>
-                            <div class="mb-2">
+                            <div class="mb-3">
                                 <BreezeLabel for="password" value="New Password" />
                                 <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required/>
                                 <div v-if="errors.password" class="text-red-600">
                                     {{ errors.password }}
                                 </div>
                             </div>
-                            <div class="mb-2">
+                            <div>
                                 <BreezeLabel for="password_confirmation" value="Password Confirmation" />
                                 <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required/>
                                 <div v-if="errors.password_confirmation" class="text-red-600">

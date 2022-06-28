@@ -51,7 +51,7 @@ export default {
                         </div>
 
                         <form @submit.prevent="form.put(route('profile.user.update', form.id))">
-                            <div class="mb-2">
+                            <div class="mb-3">
                                 <BreezeLabel for="name" value="Name" />
                                 <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required/>
                                 <div v-if="errors.name" class="text-red-600">
