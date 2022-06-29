@@ -1,10 +1,11 @@
 <script>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import BreezeButton from '@/Components/Button.vue';
+import { Head, Link } from '@inertiajs/inertia-vue3';
 
 export default {
     components: {
-        Head, BreezeAuthenticatedLayout,
+        Head, Link, BreezeButton, BreezeAuthenticatedLayout,
     },
 
     props: {
@@ -27,6 +28,16 @@ export default {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
+                        <div class="grid grid-rows-1 grid-flow-col gap-4">
+                            <div class="mb-5">
+                                <Link
+                                    :href="route('products.create')"
+                                    class="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded">
+
+                                    Add Product
+                                </Link>
+                            </div>
+                        </div>
                         <table style="width: 100%" class="border-collapse border border-slate-400">
                             <thead>
                                 <tr class="row bg-slate-100">

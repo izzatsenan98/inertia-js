@@ -1,0 +1,153 @@
+[x-cloak] {
+    display: none !important;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.btn-warning,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning.focus,
+.btn-warning.disabled,
+.btn-warning:disabled,
+.btn-warning:not(:disabled):not(.disabled):active,
+.btn-warning:not(:disabled):not(.disabled).active,
+.show > .btn-warning.dropdown-toggle,
+.btn-outline-warning:hover,
+.btn-outline-warning:not(:disabled):not(.disabled):active,
+.btn-outline-warning:not(:disabled):not(.disabled).active,
+.show > .btn-outline-warning.dropdown-toggle,
+.badge-warning,
+a.badge-warning:hover,
+a.badge-warning:focus {
+    color: $white;
+}
+
+.btn-group-xs > .btn, .btn-xs {
+    padding: .3rem;
+    font-size: .75rem;
+    line-height: 1;
+    border-radius: .2rem;
+}
+
+.font-weight-semibold {
+    font-weight: 600 !important;
+}
+
+.rounded-xl {
+    border-radius: 0.6rem !important;
+}
+
+#toast-container {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 500;
+}
+
+.toast {
+    min-width: 350px;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+@media (min-width: 600px) {
+    .toast {
+        flex-basis: 450px;
+        min-width: 450px;
+        max-width: 450px;
+    }
+}
+
+.search-clear,
+.search-clear:hover {
+    position: absolute;
+    top: 6px;
+    right: 48px;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 24px;
+    text-decoration: none;
+    color: red;
+    z-index: 100;
+}
+
+.show-page-spinner {
+    position: relative;
+    overflow: hidden;
+}
+
+// Remove spinner on number input
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+// Form label
+.col-form-label {
+    font-weight: 600;
+}
+
+.col-form-label.is-invalid {
+    color: #e3342f
+}
+
+.col-form-label.is-valid {
+    color: #38c172
+}
+
+// Required asterisk
+.required-asterisk {
+    display: inline-block;
+    position: relative;
+    top: -0.6rem;
+    right: 0.1rem;
+    color: #e3342f !important;
+    font-family: "Font Awesome 5 Free";
+    font-size: 0.55rem;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    font-weight: 700;
+    line-height: 1;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+.required-asterisk:before {
+    content: "\f069";
+}
+
+// Checkbox, radio and switch
+$op-custom-controls: (
+    checkbox,
+    radio,
+    switch,
+);
+
+@each $custom-control in $op-custom-controls {
+    .custom--#{$custom-control} {
+        margin-bottom: 0.25rem;
+    }
+
+    .custom-#{$custom-control} input,
+    .custom-#{$custom-control} label {
+        cursor: pointer;
+    }
+
+    .custom-#{$custom-control} input {
+        width: 2.25rem;
+    }
+}

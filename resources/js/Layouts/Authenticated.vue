@@ -5,6 +5,7 @@ import BreezeDropdown from '@/Components/Dropdown.vue';
 import BreezeDropdownLink from '@/Components/DropdownLink.vue';
 import BreezeNavLink from '@/Components/NavLink.vue';
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import CustomToast from '@/Components/Toast.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
@@ -30,7 +31,7 @@ const showingNavigationDropdown = ref(false);
                                 <BreezeNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </BreezeNavLink>
-                                <BreezeNavLink :href="route('products.index')" :active="route().current('products.index')">
+                                <BreezeNavLink :href="route('products.index')" :active="route().current('products.*')">
                                     Products
                                 </BreezeNavLink>
                             </div>
@@ -85,6 +86,9 @@ const showingNavigationDropdown = ref(false);
                         <BreezeResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </BreezeResponsiveNavLink>
+                        <BreezeResponsiveNavLink :href="route('products.index')" :active="route().current('products.*')">
+                            Products
+                        </BreezeResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
@@ -115,6 +119,10 @@ const showingNavigationDropdown = ref(false);
                     <slot name="header" />
                 </div>
             </header>
+
+
+            <!-- Toast Notification -->
+            <CustomToast :toast="$page.props.toast"></CustomToast>
 
             <!-- Page Content -->
             <main>

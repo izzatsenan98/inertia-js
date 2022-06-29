@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\ProductObserver;
 use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,12 @@ class Product extends Model
     protected $fillable = [
         'name',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::observe(new ProductObserver());
+    }
 
     public static function booted(){
         static::addGlobalScope(new UserScope());
