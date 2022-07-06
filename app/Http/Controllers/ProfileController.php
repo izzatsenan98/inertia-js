@@ -20,7 +20,12 @@ class ProfileController extends Controller
     {
         $request->user()->update($request->validated());
 
-        return back()->with('message', 'User profile updated successfully.');
+        return back()->with([
+            'toast' => [
+                'type' => 'success',
+                'message' => 'User Profile Updated Succesfully',
+            ]
+        ]);
     }
 
     public function showPasswordForm()
@@ -32,6 +37,11 @@ class ProfileController extends Controller
     {
         $request->user()->update($request->validated());
 
-        return back()->with('message', __('The password has been updated.'));
+        return back()->with([
+            'toast' => [
+                'type' => 'success',
+                'message' => 'Password Updated Succesfully',
+            ]
+        ]);
     }
 }

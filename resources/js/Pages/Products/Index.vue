@@ -10,7 +10,24 @@ export default {
 
     props: {
         products: Object,
-    }
+    },
+
+    methods: {
+        toastDeleteSuccess() {
+            return {
+                type: 'success',
+                message: 'Product has been deleted successfully.'
+            }
+        },
+
+        destroy(product) {
+            // delete then reload list
+            axios.delete("/products/" + product).then(response => {
+                this.$page.props.toast = this.toastDeleteSuccess();
+                this.$inertia.reload();
+            });
+        },
+    },
 }
 </script>
 
@@ -38,23 +55,43 @@ export default {
                                 </Link>
                             </div>
                         </div>
-                        <table style="width: 100%" class="border-collapse border border-slate-400">
+                        <table style="width: 100%" class="rounded-lg">
                             <thead>
-                                <tr class="row bg-slate-100">
-                                    <th class="border border-slate-200">Name</th>
-                                    <th class="border border-slate-200">Created At</th>
-                                    <th class="border border-slate-200">Actions</th>
+                                <tr class="row border-t-1 bg-slate-100 text-left">
+                                    <th class="border-slate-200" style="padding: .5em">Name</th>
+                                    <th class="border-slate-200">Created At</th>
+                                    <th style="width: 90px" class="border-slate-200"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(product) in products"
                                     :key="product.id"
-                                    class="row hover:bg-slate-100">
+                                    class="row border-t-2 hover:bg-slate-100">
 
-                                    <td class="border border-slate-200" style="padding: .3em">{{ product.name }}</td>
-                                    <td class="border border-slate-200">{{ product.created_at }}</td>
-                                    <td class="border border-slate-200">
+                                    <td class="border-slate-200" style="padding: .5em">{{ product.name }}</td>
+                                    <td class="border-slate-200">{{ product.created_at }}</td>
+                                    <td class="border-slate-200">
+                                        <div class="grid grid-cols-3 gap-0">
+                                            <div class="mt-1">
+                                                <Link :href="route('products.edit', product.id)" class="text-gray-300 hover:text-gray-700 font-bold py-1 px-2 rounded w-8 text-3xl">
+                                                    o
+                                                </Link>
+                                            </div>
+                                            <div class="">
+                                                <button
+                                                    onclick="confirm('Are you sure you want to delete this Record?') || event.stopImmediatePropagation()"
+                                                    class="text-red-300 hover:text-red-700 font-bold py-1 px-2 rounded w-8 text-3xl"
+                                                    @click="destroy(product.id)">
 
+                                                    x
+                                                </button>
+                                            </div>
+                                            <div class="mt-1">
+                                                <Link :href="route('products.show', product.id)" class="text-blue-300 hover:text-blue-700 font-bold py-1 px-2 rounded w-8 text-3xl">
+                                                    >
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>

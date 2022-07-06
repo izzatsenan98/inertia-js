@@ -12,25 +12,20 @@
             }
         },
 
-        // TODO: watch not working because not detect change in toast
-        // watch: {
-        //     toast: {
-        //         handler(newData, oldData) {
-        //             console.log(newData, oldData)
-        //         },
-        //         deep: true
-        //     }
-        // },
+        // TODO: watch working after add immediate
+        watch: {
+            toast: {
+                handler() {
+                    this.visible = true;
 
-        mounted() {
-            if (this.toast) {
-                this.visible = true;
+                    if (this.timeout) {
+                        clearTimeout(this.timeout);
+                    }
 
-                if (this.timeout) {
-                    clearTimeout(this.timeout);
-                }
-
-                // setTimeout(() => this.visible = false, 1000);
+                    setTimeout(() => this.visible = false, 1000);
+                },
+                deep: true,
+                immediate: true
             }
         },
     }
@@ -64,17 +59,17 @@
 
 <style>
 .slide-fade-enter-active {
-  transition: all 0.5s ease-out;
+  transition: all 1s ease-out;
 }
 
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 1, 0.8, 1);
+  transition: all 1s;
 }
 
-.slide-fade-enter-from,
+/* .slide-fade-enter-from,
 .slide-fade-leave-to {
   transform: translateX(150px);
   opacity: 0;
-}
+} */
 
 </style>
