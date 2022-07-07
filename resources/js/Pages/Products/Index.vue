@@ -9,7 +9,15 @@ export default {
     },
 
     props: {
+        item_id: Number,
         products: Object,
+    },
+
+    data() {
+        return {
+            justAdded: false,
+            timeout: null,
+        }
     },
 
     methods: {
@@ -27,6 +35,24 @@ export default {
                 this.$inertia.reload();
             });
         },
+    },
+
+    watch: {
+        item_id: {
+            handler(n) {
+                if (n) {
+                    this.justAdded = true;
+                }
+
+                if (this.timeout) {
+                    clearTimeout(this.timeout);
+                }
+
+                setTimeout(() => this.justAdded = false, 1500);
+            },
+            deep: true,
+            immediate: true,
+        }
     },
 }
 </script>
@@ -66,7 +92,8 @@ export default {
                             <tbody>
                                 <tr v-for="(product) in products"
                                     :key="product.id"
-                                    class="row border-t-2 hover:bg-slate-100">
+                                    class="row border-t-2 hover:bg-slate-100"
+                                    :class="{'bg-green-200': justAdded && product.id === item_id}">
 
                                     <td class="border-slate-200" style="padding: .5em">{{ product.name }}</td>
                                     <td class="border-slate-200">{{ product.created_at }}</td>

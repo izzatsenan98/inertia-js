@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        sleep(1);
+        sleep(0.9);
 
         $products =  ProductResource::collection(Product::all()->sortByDesc('created_at'));
 
@@ -31,6 +31,7 @@ class ProductController extends Controller
         $product = Product::create($request->validated());
 
         return redirect(route('products.index'))
+            ->with('item_id', $product->id)
             ->with([
                 'toast' => [
                     'type' => 'success',
@@ -51,6 +52,7 @@ class ProductController extends Controller
         $product->update($request->validated());
 
         return redirect(route('products.index'))
+            ->with('item_id', $product->id)
             ->with([
                 'toast' => [
                     'type' => 'success',
@@ -78,8 +80,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        sleep(1);
-        
+        sleep(0.9);
+
         $product->delete();
 
         return response()->noContent();

@@ -47,6 +47,9 @@ class HandleInertiaRequests extends Middleware
             'toast' => function () {
                 return session('toast');
             },
+            'item_id' => function () {
+                return session('item_id');
+            },
         ]);
     }
 }

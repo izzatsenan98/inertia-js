@@ -22724,7 +22724,14 @@ __webpack_require__.r(__webpack_exports__);
     BreezeAuthenticatedLayout: _Layouts_Authenticated_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
+    item_id: Number,
     products: Object
+  },
+  data: function data() {
+    return {
+      justAdded: false,
+      timeout: null
+    };
   },
   methods: {
     toastDeleteSuccess: function toastDeleteSuccess() {
@@ -22742,6 +22749,27 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$inertia.reload();
       });
+    }
+  },
+  watch: {
+    item_id: {
+      handler: function handler(n) {
+        var _this2 = this;
+
+        if (n) {
+          this.justAdded = true;
+        }
+
+        if (this.timeout) {
+          clearTimeout(this.timeout);
+        }
+
+        setTimeout(function () {
+          return _this2.justAdded = false;
+        }, 1500);
+      },
+      deep: true,
+      immediate: true
     }
   }
 });
@@ -24733,7 +24761,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["href"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.products, function (product) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
           key: product.id,
-          "class": "row border-t-2 hover:bg-slate-100"
+          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["row border-t-2 hover:bg-slate-100", {
+            'bg-green-200': $data.justAdded && product.id === $props.item_id
+          }])
         }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1
         /* TEXT */
         ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.created_at), 1
@@ -24770,7 +24800,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
         }, 1032
         /* PROPS, DYNAMIC_SLOTS */
-        , ["href"])])])])]);
+        , ["href"])])])])], 2
+        /* CLASS */
+        );
       }), 128
       /* KEYED_FRAGMENT */
       ))])])])])])])];
@@ -25329,7 +25361,7 @@ _inertiajs_progress__WEBPACK_IMPORTED_MODULE_3__.InertiaProgress.init({
   // Delay for bar to appear in miliseconds
   // delay: 0,
   // The color of the progress bar
-  color: '#4B5563'
+  color: '#42f572'
 });
 
 /***/ }),
