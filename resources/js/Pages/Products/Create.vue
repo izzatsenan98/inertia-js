@@ -1,29 +1,3 @@
-<script>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-import BreezeButton from '@/Components/Button.vue';
-import BreezeInput from '@/Components/Input.vue';
-import BreezeLabel from '@/Components/Label.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-
-export default {
-    components: {
-        Head, Link, BreezeAuthenticatedLayout, BreezeButton, BreezeInput, BreezeLabel
-    },
-
-    props: {
-        errors: Object,
-    },
-
-    setup() {
-        const form = useForm({
-            name: '',
-        })
-
-        return { form }
-    }
-}
-</script>
-
 <template>
     <Head title="User Profile" />
 
@@ -60,3 +34,28 @@ export default {
     </BreezeAuthenticatedLayout>
 </template>
 
+<script>
+import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
+import BreezeButton from '@/Components/Button.vue';
+import BreezeInput from '@/Components/Input.vue';
+import BreezeLabel from '@/Components/Label.vue';
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+
+export default {
+    components: {
+        Head, Link, BreezeAuthenticatedLayout, BreezeButton, BreezeInput, BreezeLabel
+    },
+
+    props: {
+        errors: Object,
+    },
+
+    setup() {
+        const form = useForm({
+            name: '',
+        })
+
+        return { form }
+    }
+}
+</script>

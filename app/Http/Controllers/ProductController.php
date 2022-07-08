@@ -14,7 +14,8 @@ class ProductController extends Controller
     {
         sleep(0.9);
 
-        $products =  ProductResource::collection(Product::all()->sortByDesc('created_at'));
+        // $products = ProductResource::collection(Product::productsQuery()->paginate(10));
+        $products = Product::productsQuery()->paginate(10);
 
         return Inertia::render('Products/Index', [
             'products' => $products,
@@ -64,8 +65,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return Inertia::render('Products/Show', [
-            'product' => [
-                'name' => $product->name,
+            'product' => $product,
+            'productAlt' => [
                 'created_at' => $product->created_at->format('Y-m-d H:i:s'),
                 'updated_at' => $product->updated_at->format('Y-m-d H:i:s'),
             ]

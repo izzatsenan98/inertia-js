@@ -50,6 +50,11 @@ class HandleInertiaRequests extends Middleware
             'item_id' => function () {
                 return session('item_id');
             },
+            'filters' => [
+                'search',
+                'field',
+                'direction',
+            ]
         ]);
     }
 }

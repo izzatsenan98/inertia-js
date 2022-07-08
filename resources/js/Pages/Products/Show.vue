@@ -1,18 +1,3 @@
-<script>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
-
-export default {
-    components: {
-        Head, Link, BreezeAuthenticatedLayout
-    },
-
-    props: {
-        product: Object,
-    },
-}
-</script>
-
 <template>
     <Head title="User Profile" />
 
@@ -32,10 +17,10 @@ export default {
                             <div class="col-span-3 mb-2">{{ product.name }}</div>
 
                             <div class="font-bold">Created At</div>
-                            <div class="col-span-3 mb-2">{{ product.created_at }}</div>
+                            <div class="col-span-3 mb-2">{{ productAlt.created_at }}</div>
 
                             <div class="font-bold">Updated At</div>
-                            <div class="col-span-3 mb-2">{{ product.updated_at }}</div>
+                            <div class="col-span-3 mb-2">{{ productAlt.updated_at }}</div>
                         </div>
                     </div>
                 </div>
@@ -44,3 +29,18 @@ export default {
     </BreezeAuthenticatedLayout>
 </template>
 
+<script>
+import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
+import { Head, Link } from '@inertiajs/inertia-vue3';
+
+export default {
+    components: {
+        Head, Link, BreezeAuthenticatedLayout
+    },
+
+    props: {
+        product: Object,
+        productAlt: Object,
+    },
+}
+</script>

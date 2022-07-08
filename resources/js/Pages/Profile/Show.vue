@@ -1,45 +1,3 @@
-<script>
-import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-import BreezeButton from '@/Components/Button.vue';
-import BreezeInput from '@/Components/Input.vue';
-import BreezeLabel from '@/Components/Label.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
-
-export default {
-    components: {
-        Head, Link, BreezeAuthenticatedLayout, BreezeButton, BreezeInput, BreezeLabel
-    },
-
-    props: {
-        user: Object,
-        errors: Object,
-    },
-
-    setup(props) {
-        // const form = useForm({
-        //     id: props.user.id,
-        //     name: props.user.name,
-        //     email: props.user.email,
-        // });
-
-        const form = useForm(props.user)
-
-        return { form }
-    },
-
-    // Testing watch
-    watch: {
-        user: {
-            handler(n, o) {
-                console.log(n.name)
-                console.log(o.name)
-            },
-            deep: true
-        }
-    },
-}
-</script>
-
 <template>
     <Head title="User Profile" />
 
@@ -89,3 +47,44 @@ export default {
     </BreezeAuthenticatedLayout>
 </template>
 
+<script>
+import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
+import BreezeButton from '@/Components/Button.vue';
+import BreezeInput from '@/Components/Input.vue';
+import BreezeLabel from '@/Components/Label.vue';
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+
+export default {
+    components: {
+        Head, Link, BreezeAuthenticatedLayout, BreezeButton, BreezeInput, BreezeLabel
+    },
+
+    props: {
+        user: Object,
+        errors: Object,
+    },
+
+    setup(props) {
+        // const form = useForm({
+        //     id: props.user.id,
+        //     name: props.user.name,
+        //     email: props.user.email,
+        // });
+
+        const form = useForm(props.user)
+
+        return { form }
+    },
+
+    // Testing watch
+    watch: {
+        user: {
+            handler(n, o) {
+                console.log(n.name)
+                console.log(o.name)
+            },
+            deep: true
+        }
+    },
+}
+</script>
