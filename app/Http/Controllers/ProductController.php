@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,8 +13,6 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        sleep(0.9);
-
         // $products = ProductResource::collection(Product::productsQuery()->paginate(10));
         $products = Product::productsQuery()->paginate(10);
 
@@ -24,7 +23,11 @@ class ProductController extends Controller
 
     public function create()
     {
-        return Inertia::render('Products/Create');
+        $categories = Category::pluck('name', 'id');
+
+        return Inertia::render('Products/Create', [
+            'categories' => $categories,
+        ]);
     }
 
     public function store(ProductRequest $request)
@@ -81,8 +84,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        sleep(0.9);
-
         $product->delete();
 
         return response()->noContent();

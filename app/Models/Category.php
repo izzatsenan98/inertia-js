@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\Observers\ProductObserver;
+use App\Observers\CategoryObserver;
 use App\Scopes\UserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Category extends Model
 {
     use HasFactory;
 
@@ -18,7 +18,7 @@ class Product extends Model
      */
     protected $fillable = [
         'name',
-        'category_id',
+        'description',
     ];
 
     /**
@@ -38,12 +38,12 @@ class Product extends Model
     }
 
     /**
-     * Query filter for products
+     * Query filter for categories
      *
      * @param mixed $query
      * @return void
      */
-    public function scopeProductsQuery($query)
+    public function scopeCategoriesQuery($query)
     {
         $search = request('search', '');
 
@@ -58,15 +58,14 @@ class Product extends Model
             $field = 'created_at';
         }
 
-        $query->with(['category:id,name'])
-            ->orderBy($field, $direction)
+        $query->orderBy($field, $direction)
             ->search(trim($search));
     }
 
     protected static function boot()
     {
         parent::boot();
-        static::observe(new ProductObserver());
+        static::observe(new CategoryObserver());
     }
 
     public static function booted()
@@ -74,8 +73,9 @@ class Product extends Model
         static::addGlobalScope(new UserScope());
     }
 
-    public function category()
+    public function products()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Product::class);
     }
+
 }

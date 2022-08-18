@@ -15,10 +15,23 @@
                         <form @submit.prevent="form.post(route('products.store'))">
                             <div class="mb-3">
                                 <BreezeLabel for="name" value="Name" />
-                                <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required/>
-                                <div v-if="errors.name" class="text-red-600">
-                                    {{ errors.name }}
-                                </div>
+                                <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name"/>
+                                <Error v-if="errors.name" :message="errors.name"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <BreezeLabel for="category_id" value="Category" />
+                                <select v-model="form.category_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm w-1/2">
+                                    <option value="">Select category...</option>
+                                    <option
+                                        v-for="(category, key) in categories"
+                                        :key="key"
+                                        :value="key">
+
+                                        {{ category }}
+                                    </option>
+                                </select>
+                                <Error v-if="errors.category_id" :message="errors.category_id"/>
                             </div>
 
                             <div class="flex items-center justify-end mt-4">
@@ -39,20 +52,23 @@ import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import BreezeButton from '@/Components/Button.vue';
 import BreezeInput from '@/Components/Input.vue';
 import BreezeLabel from '@/Components/Label.vue';
+import Error from '@/Components/InputError.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 
 export default {
     components: {
-        Head, Link, BreezeAuthenticatedLayout, BreezeButton, BreezeInput, BreezeLabel
+        Head, Link, BreezeAuthenticatedLayout, BreezeButton, BreezeInput, BreezeLabel, Error
     },
 
     props: {
         errors: Object,
+        categories: Object,
     },
 
     setup() {
         const form = useForm({
             name: '',
+            category_id: '',
         })
 
         return { form }

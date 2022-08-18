@@ -30,6 +30,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    // Categories
+    Route::resource('categories', Controllers\CategoryController::class);
+
     // Products
     Route::resource('products', Controllers\ProductController::class);
 

@@ -1,10 +1,10 @@
 <template>
-    <Head title="List of Products" />
+    <Head title="List of Categories" />
 
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                List of Products
+                List of Categories
             </h2>
         </template>
 
@@ -18,10 +18,10 @@
                             </div>
                             <div class="col-span-3 text-right">
                                 <Link
-                                    :href="route('products.create')"
+                                    :href="route('categories.create')"
                                     class="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white py-2 px-4 border border-gray-500 hover:border-transparent rounded align-baseline">
 
-                                    Add Product
+                                    Add Category
                                 </Link>
                             </div>
                         </div>
@@ -39,10 +39,6 @@
                                             </svg>
                                         </span>
                                     </th>
-                                    <th class="border-slate-200" style="padding: .5em">
-                                        <span class="inline-flex w-full"><span class="pr-2">Category</span>
-                                        </span>
-                                    </th>
                                     <th class="border-slate-200">
                                         <span class="inline-flex w-full" @click="sort('created_at')"><span class="pr-2">Created At</span>
                                             <svg v-if="params.field === 'created_at' && params.direction === 'asc'" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-left" viewBox="0 0 20 20" fill="currentColor">
@@ -58,18 +54,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(product) in products.data"
-                                    :key="product.id"
+                                <tr v-for="(category) in categories.data"
+                                    :key="category.id"
                                     class="row border-t-2 hover:bg-slate-100"
-                                    :class="{'bg-green-200': justAdded && product.id === item_id}">
+                                    :class="{'bg-green-200': justAdded && category.id === item_id}">
 
-                                    <td class="border-slate-200" style="padding: .5em">{{ product.name }}</td>
-                                    <td class="border-slate-200" style="padding: .5em">{{ product.category.name }}</td>
-                                    <td class="border-slate-200">{{ new Date(product.created_at).toLocaleString() }}</td>
+                                    <td class="border-slate-200" style="padding: .5em">{{ category.name }}</td>
+                                    <td class="border-slate-200">{{ new Date(category.created_at).toLocaleString() }}</td>
                                     <td class="border-slate-200">
                                         <div class="grid grid-cols-3 gap-0">
-                                            <div class="mt-1">
-                                                <Link :href="route('products.edit', product.id)" class="text-gray-300 hover:text-gray-700 font-bold py-1 px-2 rounded w-8 text-3xl">
+                                            <!-- <div class="mt-1">
+                                                <Link :href="route('categories.edit', category.id)" class="text-gray-300 hover:text-gray-700 font-bold py-1 px-2 rounded w-8 text-3xl">
                                                     o
                                                 </Link>
                                             </div>
@@ -77,23 +72,23 @@
                                                 <button
                                                     onclick="confirm('Are you sure you want to delete this Record?') || event.stopImmediatePropagation()"
                                                     class="text-red-300 hover:text-red-700 font-bold py-1 px-2 rounded w-8 text-3xl"
-                                                    @click="destroy(product.id)">
+                                                    @click="destroy(category.id)">
 
                                                     x
                                                 </button>
                                             </div>
                                             <div class="mt-1">
-                                                <Link :href="route('products.show', product.id)" class="text-blue-300 hover:text-blue-700 font-bold py-1 px-2 rounded w-8 text-3xl">
+                                                <Link :href="route('categories.show', category.id)" class="text-blue-300 hover:text-blue-700 font-bold py-1 px-2 rounded w-8 text-3xl">
                                                     >
                                                 </Link>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <pagination class="mt-6" :links="products.links"></pagination>
+                        <pagination class="mt-6" :links="categories.links"></pagination>
                     </div>
                 </div>
             </div>
@@ -116,7 +111,7 @@ export default {
     props: {
         filters: Object,
         item_id: Number,
-        products: Object,
+        categories: Object,
     },
 
     data() {
@@ -140,13 +135,13 @@ export default {
         toastDeleteSuccess() {
             return {
                 type: 'success',
-                message: 'Product has been deleted successfully.'
+                message: 'Category has been deleted successfully.'
             }
         },
 
-        destroy(product) {
+        destroy(category) {
             // delete then reload list
-            axios.delete("/products/" + product).then(response => {
+            axios.delete("/categorys/" + category).then(response => {
                 this.$page.props.toast = this.toastDeleteSuccess();
                 this.$inertia.reload();
             });
@@ -174,7 +169,7 @@ export default {
             handler: throttle(function () {
                 let params = pickBy(this.params);
 
-                this.$inertia.get(this.route('products.index'), params, { replace: true, preserveState: true });
+                this.$inertia.get(this.route('categories.index'), params, { replace: true, preserveState: true });
             }, 150),
             deep: true,
         }
