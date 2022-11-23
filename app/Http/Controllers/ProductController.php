@@ -46,8 +46,11 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        $categories = Category::pluck('name', 'id');
+
         return Inertia::render('Products/Edit', [
-            'product' => $product
+            'product' => $product,
+            'categories' => $categories,
         ]);
     }
 
@@ -67,12 +70,14 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        // dd($product->category->name);
         return Inertia::render('Products/Show', [
             'product' => $product,
             'productAlt' => [
                 'created_at' => $product->created_at->format('Y-m-d H:i:s'),
                 'updated_at' => $product->updated_at->format('Y-m-d H:i:s'),
-            ]
+            ],
+            'category' => $product->category->name,
         ]);
     }
 
